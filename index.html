@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOOKFY.AI - Vista suas ideias</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo" onclick="showPage('home')">
+                <img src="loooook.jpg" alt="LOOKFY.AI Logo" class="header-logo">
+                <span>LOOKFY.AI</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="showPage('home')" class="active" data-page="home">Home</a></li>
+                <li><a href="#create" onclick="showPage('create')" data-page="create">Criar Estampa</a></li>
+                <li><a href="#products" onclick="showPage('products')" data-page="products">Produtos</a></li>
+                <li><a href="#about" onclick="showPage('about')" data-page="about">Sobre</a></li>
+                <li><a href="#contact" onclick="showPage('contact')" data-page="contact">Contato</a></li>
+    
+
+        </a>
+            </ul>
+            <button class="cart-btn" id="open-cart-btn">
+                <i class="fas fa-shopping-cart"></i> 
+                <span class="cart-count" id="cart-count">0</span> 
+            </button>
+        </nav>
+    </header>
+
+    <div id="home" class="page active">
+        <section class="hero video-hero">
+            <div class="hero-bg video-background">
+                <video autoplay loop muted playsinline>
+                    <source src="lookfyvi1.mp4" type="video/mp4">
+                    <source src="video_de_fundo.webm" type="video/webm">
+                    Seu navegador não suporta a tag de vídeo.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="hero-content container">
+                <h1>
+                    Vista suas ideias com a<br>
+                    <span class="gradient-text">LOOKFY.AI</span>
+                </h1>
+                <p class="subtitle">Moda personalizada com inteligência artificial</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="showPage('create')">
+                         Criar Estampa
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('products')">
+                         Ver Produtos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: linear-gradient(to bottom, #000, #111);">
+            <div class="container">
+                <div class="grid">
+                    <div class="card">
+                        <div class="icon-box">✨</div>
+                        <h3>Inovação</h3>
+                        <p>Tecnologia de IA para criar estampas únicas e exclusivas</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">🎨</div>
+                        <h3>Personalização</h3>
+                        <p>Cada peça é única, criada especialmente para você</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">📦</div>
+                        <h3>Sustentabilidade</h3>
+                        <p>Produção sob demanda para reduzir desperdício</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: #111;">
+            <div class="container">
+                <h2 class="section-title">Como funciona?</h2>
+                <p class="section-subtitle">Transforme suas ideias em moda em apenas 3 passos simples</p>
+                <div class="grid">
+                    <div class="card">
+                        <div class="icon-box" style="background: #3b82f6; color: #fff;">1</div>
+                        <h3>Descreva sua ideia</h3>
+                        <p>Digite o que você imagina e deixe a IA criar</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box" style="background: #3b82f6; color: #fff;">2</div>
+                        <h3>Visualize o resultado</h3>
+                        <p>Veja sua estampa exclusiva em segundos</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box" style="background: #3b82f6; color: #fff;">3</div>
+                        <h3>Receba em casa</h3>
+                        <p>Sua peça única produzida e entregue</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="create" class="page">
+        <section class="section">
+            <div class="container content-box">
+                <h1 class="section-title">Crie sua estampa única</h1>
+                <p class="section-subtitle">Descreva sua ideia e deixe a IA transformar em arte</p>
+
+                <div class="card">
+                    <form id="createForm" onsubmit="generatePrint(event)">
+                        <div class="form-group">
+                            <label>Descreva sua estampa</label>
+                            <textarea
+                                id="promptInput"
+                                placeholder="Ex: Um leão geométrico em tons de azul e dourado, estilo minimalista..."
+                                required
+                            ></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;" id="generateBtn">
+                            <span id="generateBtnText">✨ Gerar Estampa</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div id="previewBox" class="preview-box" style="display: none;">
+                    <h3 style="font-size: 28px; margin-bottom: 24px;">Sua estampa está pronta!</h3>
+                    <div class="preview-image">
+                        <img id="previewImage" src="" alt="Estampa gerada">
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary">Adicionar ao Carrinho</button> 
+                        <button class="btn btn-secondary" onclick="resetForm()">Criar Nova Estampa</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="products" class="page">
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Produtos Prontos</h1>
+                <p class="section-subtitle">Peças exclusivas criadas com IA, prontas para você</p>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterProducts(event, 'all')">Todos</button>
+                    <button class="filter-btn" onclick="filterProducts(event, 'shirt')">Camisetas</button>
+                    <button class="filter-btn" onclick="filterProducts(event, 'hoodie')">Moletons</button>
+                </div>
+
+                <div class="grid" id="productsGrid"></div>
+            </div>
+        </section>
+    </div>
+
+    <div id="about" class="page">
+        <section class="section">
+            <div class="container content-box">
+                <h1 class="section-title">Sobre a LOOKFY.AI</h1>
+                <p class="section-subtitle">Onde tecnologia encontra moda</p>
+                <div class="card" style="text-align: left;">
+                    <p style="font-size: 18px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 24px;">
+                        A <strong style="color: #3b82f6;">LOOKFY.AI</strong> nasceu para conectar moda e tecnologia.
+                        Nossa missão é permitir que cada pessoa vista suas ideias, com peças únicas e produzidas sob demanda.
+                    </p>
+                    <p style="font-size: 18px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 24px;">
+                        Acreditamos que a moda deve ser uma forma de autoexpressão autêntica. Por isso,
+                        criamos uma plataforma onde a inteligência artificial transforma suas ideias em
+                        estampas exclusivas, permitindo que você use roupas que são verdadeiramente suas.
+                    </p>
+                    <p style="font-size: 18px; line-height: 1.8; color: rgba(255,255,255,0.8);">
+                        Combinamos inovação tecnológica com sustentabilidade, produzindo apenas o que é
+                        pedido e reduzindo o desperdício na indústria da moda.
+                    </p>
+                </div>
+                <div class="grid" style="margin-top: 48px;">
+                    <div class="card">
+                        <div class="icon-box">✨</div>
+                        <h3>Inovação</h3>
+                        <p>IA de última geração para criar designs únicos</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">❤️</div>
+                        <h3>Autenticidade</h3>
+                        <p>Cada peça é única e reflete sua personalidade</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">⚡</div>
+                        <h3>Sustentabilidade</h3>
+                        <p>Produção sob demanda, sem desperdício</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="contact" class="page">
+        <section class="section">
+            <div class="container content-box">
+                <h1 class="section-title">Entre em Contato</h1>
+                <p class="section-subtitle">Estamos aqui para ajudar. Envie sua mensagem!</p>
+
+                <div class="card">
+                    <form id="contactForm" onsubmit="sendMessage(event)">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="email" placeholder="seu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mensagem</label>
+                            <textarea placeholder="Conte-nos como podemos ajudar..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            📧 Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+
+<div id="login" class="page">
+    <section class="section">
+        <div class="container content-box">
+            <h1 class="section-title">Acesse sua Conta</h1>
+            <p class="section-subtitle">Entre para criar, salvar e comprar suas estampas.</p>
+
+            <div class="card">
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                    <p style="text-align: center; margin-top: 20px; color: #aaa;">
+                        Não tem conta? 
+                        <a href="#" onclick="showPage('signup')" style="color: #3b82f6;">Cadastre-se aqui.</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="signup" class="page">
+    <section class="section">
+        <div class="container content-box">
+            <h1 class="section-title">Crie sua Conta</h1>
+            <p class="section-subtitle">Rápido e fácil. Comece a vestir suas ideias!</p>
+
+            <div class="card">
+                <form id="signupForm" onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="signupName" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" id="signupEmail" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" id="signupPassword" placeholder="Crie uma senha forte" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-user-plus"></i> Cadastrar
+                    </button>
+                    <p style="text-align: center; margin-top: 20px; color: #aaa;">
+                        Já tem conta? 
+                        <a href="#" onclick="showPage('login')" style="color: #3b82f6;">Faça login.</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="profile" class="page">
+    <section class="section">
+        <div class="container content-box">
+            <h1 class="section-title">Bem-vindo(a), <span id="profileUserName">Usuário</span>!</h1>
+            <p class="section-subtitle">Sua área de membro.</p>
+            
+            <div class="card" style="text-align: left;">
+                <h3>Informações da Conta</h3>
+                <p><strong>E-mail:</strong> <span id="profileUserEmail"></span></p>
+                <p><strong>Status:</strong> Logado (armazenamento local)</p>
+                <button class="btn btn-secondary" onclick="handleLogout()" style="margin-top: 20px;">
+                    <i class="fas fa-sign-out-alt"></i> Sair da Conta
+                </button>
+            </div>
+        </div>
+    </section>
+</div>
+
+                <div class="grid" style="margin-top: 48px;">
+                    <div class="card">
+                        <div class="icon-box">📧</div>
+                        <h3>E-mail</h3>
+                        <p>contatolookfyai@gmail.com</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">📱</div>
+                        <h3>Redes Sociais</h3>
+                        <div class="social-links" style="justify-content: center; margin-top: 16px;">
+                            <a href="#">📷</a>
+                            <a href="#">🐦</a>
+                            <a href="#">👍</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">🕐</div>
+                        <h3>Horário</h3>
+                        <p>Seg-Sex: 9h às 18h<br>Resposta: até 24h</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>LOOKFY.AI</h4>
+                    <p>Moda personalizada com inteligência artificial. Vista suas ideias.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <a href="#" onclick="showPage('products')">Produtos</a>
+                    <a href="#" onclick="showPage('about')">Sobre</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#">📷 instagram.com/lookfy.ai</a>
+                        <a href="#">🐦lookfy.aii1</a>
+                        <a href="#">👍linktree/lookfy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="color: rgba(255,255,255,0.6); font-size: 14px;">
+                    © 2025 LOOKFY.AI. Todos os direitos reservados.
+                </p>
+                <button class="back-to-top" onclick="scrollToTop()">↑</button>
+            </div>
+        </div>
+    </footer>
+
+    <div class="product-modal-overlay" id="product-modal-overlay">
+        <div class="product-modal" id="product-modal">
+            <button class="close-btn" onclick="closeProductModal()">&times;</button>
+            <div class="modal-content-container" id="modal-content-container">
+                </div>
+        </div>
+    </div>
+    
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <button class="close-btn" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <p class="empty-message">Seu carrinho está vazio.</p>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">R$ 0,00</span>
+            </div>
+            <button class="btn btn-primary btn-checkout">
+                <i class="fas fa-credit-card"></i> Finalizar Compra
+            </button>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    
+    <script src="script.js"></script>
+    <a href="https://wa.me/5584994080700?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20as%20estampas%20IA%20da%20LOOKFY.AI" 
+       class="whatsapp-float" 
+       target="_blank" 
+       title="Fale Conosco pelo WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>
